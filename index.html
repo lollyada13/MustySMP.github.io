@@ -44,7 +44,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              Feane
+              Mucky
             </span>
           </a>
 
@@ -149,12 +149,12 @@
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>
-                      Fast Food Restaurant
+                      MuckySMP
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
+                      Welcome to MuckySMP, a Minecraft survival multiplayer server that offers a unique and engaging gaming experience. Join our community of players and embark on exciting adventures, build incredible structures, and explore a vast world filled with endless possibilities. Whether you're a seasoned Minecraft veteran or new to the game, MuckySMP provides a welcoming and inclusive environment for all players to enjoy. Come join us and be part of the fun!
                     <div class="btn-box">
+                      </p>
                       <a href="" class="btn1">
                         Order Now
                       </a>
@@ -170,10 +170,11 @@
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>
-                      Fast Food Restaurant
+                      MuckySMP
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                       Welcome to MuckySMP, a Minecraft survival multiplayer server that offers a unique and engaging gaming experience. Join our community of players and embark on exciting adventures, build incredible structures, and explore a vast world filled with endless possibilities. Whether you're a seasoned Minecraft veteran or new to the game, MuckySMP provides a welcoming and inclusive environment for all players to enjoy. Come join us and be part of the fun!
+                    <div class="btn-box">
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
@@ -191,11 +192,12 @@
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>
-                      Fast Food Restaurant
+                      MuckySMP
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
+                       Welcome to MuckySMP, a Minecraft survival multiplayer server that offers a unique and engaging gaming experience. Join our community of players and embark on exciting adventures, build incredible structures, and explore a vast world filled with endless possibilities. Whether you're a seasoned Minecraft veteran or new to the game, MuckySMP provides a welcoming and inclusive environment for all players to enjoy. Come join us and be part of the fun!
+                    <div class="btn-box">
+                      </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
                         Order Now
@@ -233,13 +235,26 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Tasty Thursdays
+                  Java Edition
                 </h5>
                 <h6>
-                  <span>20%</span> Off
+                  <span>IP
+</span> zone-final.gl.joinmc.link
+
                 </h6>
-                <a href="">
-                  Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                
+                <a href="#" class="copy-ip" data-ip="zone-final.gl.joinmc.link" style="text-decoration: none; cursor: pointer;">
+  Copy Java IP
+</a>
+
+<script>
+document.getElementById("mc-ip-btn").addEventListener("click", function(event) {
+    event.preventDefault();
+    navigator.clipboard.writeText("zone-final.gl.joinmc.link");
+    alert("IP copied!");
+});
+</script>
+                   
                     <g>
                       <g>
                         <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
@@ -302,13 +317,22 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Pizza Days
+                  Bedrock Edition
                 </h5>
                 <h6>
-                  <span>15%</span> Off
+                  <span>IP:</span> primary-foam.gl.at.ply.gg:6663
+
                 </h6>
-                <a href="">
-                  Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                <a href="#" class="copy-ip" data-ip="primary-foam.gl.at.ply.gg:(6663 is the port)" style="text-decoration: none; cursor: pointer;">
+  Copy Bedrock + Port IP
+</a>
+<script>
+document.getElementById("mc-ip-btn").addEventListener("click", function(event) {
+    event.preventDefault();
+    navigator.clipboard.writeText("primary-foam.gl.at.ply.gg(6663 is the port)");
+    alert("IP copied!");
+});
+</script>
                     <g>
                       <g>
                         <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
@@ -1339,7 +1363,16 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-
+<script>
+document.querySelectorAll(".copy-ip").forEach(btn => {
+    btn.addEventListener("click", function(event) {
+        event.preventDefault();
+        const ip = this.getAttribute("data-ip");
+        navigator.clipboard.writeText(ip);
+        alert("Copied: " + ip);
+    });
+});
+</script>
 </body>
 
 </html>
