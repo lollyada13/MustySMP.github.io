@@ -54,19 +54,21 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="index.html">Home </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="items.html">Custom Items</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="about.html">About <span class="sr-only">(current)</span> </a>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
               </li>
-              
+              <li class="nav-item active">
+                <a class="nav-link" href="login.html">Login <span class="sr-only">(current)</span> </a>
+              </li>
             </ul>
             <div class="user_option">
-              <a href="login.html" class="user_link">
+              <a href="" class="user_link">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
               <a class="cart_link" href="#">
@@ -139,57 +141,67 @@
     <!-- end header section -->
   </div>
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-
+  <!-- book section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Log In
+        </h2>
+      </div>
       <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/about-img.png" alt="">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form action="">
+              <div>
+                <input type="text" class="form-control" placeholder="Your Name" />
+              </div>
+              <div>
+                <input type="text" class="form-control" placeholder="Phone Number" />
+              </div>
+              <div>
+                <input type="email" class="form-control" placeholder="Your Email" />
+              </div>
+              <div>
+                <select class="form-control nice-select wide">
+                  <option value="" disabled selected>
+                    How many persons?
+                  </option>
+                  <option value="">
+                    2
+                  </option>
+                  <option value="">
+                    3
+                  </option>
+                  <option value="">
+                    4
+                  </option>
+                  <option value="">
+                    5
+                  </option>
+                </select>
+              </div>
+              <div>
+                <input type="date" class="form-control">
+              </div>
+              <div class="btn_box">
+                <button>
+                  Book Now
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                The Muckers
-              </h2>
-              <p>A community of chaos, fun, and unforgettable moments.</p>
-            </div>
-            <p>
-Welcome to our server! We proudly call ourselves <strong>Muckers</strong> —
-a group of friends and gamers who enjoy messing around, having fun,
-and building a community where everyone feels welcome.
-</p>
-
-<h4>What We Do</h4>
-<ul>
-  <li> Play games together</li>
-  <li> Hang out and chat</li>
-  <li> Share memes and jokes</li>
-  <li> Build a friendly community</li>
-</ul>
-
-<h4>Our Goal</h4>
-<p>
-Our goal is simple create a place where people can relax,
-laugh, and enjoy time together online. If you like good vibes
-and a little bit of chaos, you’ll fit right in with the Muckers.
-</p>
-
-            <a href="index.html">
-              Join Us
-            </a>
+          <div class="map_container ">
+            <div id="googleMap"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- end book section -->
 
-  <!-- end about section -->
-<br></br>
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
@@ -237,7 +249,7 @@ and a little bit of chaos, you’ll fit right in with the Muckers.
                 <i class="fa fa-twitter" aria-hidden="true"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
               <a href="">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
@@ -253,10 +265,10 @@ and a little bit of chaos, you’ll fit right in with the Muckers.
             Opening Hours
           </h4>
           <p>
-            Maybe online
+            Maybe Online
           </p>
           <p>
-            Until 9:00 PM
+            until 9:00 PM
           </p>
         </div>
       </div>
