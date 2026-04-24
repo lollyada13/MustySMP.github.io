@@ -1,251 +1,274 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
-  <title>MuckySMP - Custom Items</title>
+  <title>MuckySMP — Custom Items</title>
 
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFekhbmBK5skbdsASbQ==" crossorigin="anonymous" />
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Category filter pills ── */
-    .filters_menu {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 30px;
+    :root {
+      --bg:       #08090f;
+      --surface:  #0e1018;
+      --surface2: #13161f;
+      --border:   #1e2130;
+      --accent:   #c8a96e;
+      --text:     #d4d8e8;
+      --muted:    #6b7190;
     }
-    .filters_menu li {
-      cursor: pointer;
-      padding: 6px 18px;
-      border: 2px solid #e84393;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 14px;
-      transition: all .2s;
-      background: transparent;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
     }
-    .filters_menu li.active,
-    .filters_menu li:hover {
-      background: #e84393;
-      color: #fff;
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* ── Item cards ── */
-    .item-card {
-      background: #1a1a2e;
-      border: 2px solid #333;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 28px;
-      transition: transform .2s, border-color .2s;
-    }
-    .item-card:hover {
-      transform: translateY(-4px);
-      border-color: #e84393;
-    }
-    .item-card .img-box {
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      min-height: 160px;
-    }
-    .item-card .img-box img {
-      max-height: 120px;
-      max-width: 100%;
-      object-fit: contain;
-      image-rendering: pixelated;
-    }
-    .item-card .detail-box {
-      padding: 16px;
-    }
-    .item-card .detail-box h5 {
-      color: #fff;
-      font-family: 'VT323', monospace;
-      font-size: 1.4rem;
-      margin-bottom: 4px;
-    }
-    .item-card .detail-box .category-badge {
-      display: inline-block;
-      font-size: 11px;
-      padding: 2px 10px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-    }
-    .badge-weapon   { background: #7b1010; color: #ffc; }
-    .badge-armor    { background: #1a4a7b; color: #cef; }
-    .badge-tool     { background: #2a6e2a; color: #cfc; }
-    .badge-misc     { background: #5a3a7b; color: #e8d; }
-    .badge-bow      { background: #7b5a10; color: #fed; }
-    .badge-consumable { background: #1a6e4a; color: #cfe; }
+    /* NAV */
+    .hero_area { position: relative; min-height: unset !important; }
+    .bg-box { position: absolute; inset: 0; overflow: hidden; }
+    .bg-box img { width:100%; height:100%; object-fit:cover; opacity:.1; }
+    .header_section { background: rgba(8,9,15,0.96); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+    .navbar-brand span { font-family:'Cinzel',serif; font-weight:900; font-size:1.4rem; color:var(--accent) !important; letter-spacing:3px; }
+    .nav-link { font-size:12px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted) !important; transition:color .2s; }
+    .nav-item.active .nav-link, .nav-link:hover { color:var(--accent) !important; }
+    .order_online { font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); border:1px solid rgba(200,169,110,.4); padding:6px 16px; transition:all .2s; }
+    .order_online:hover { background:var(--accent); color:#000; text-decoration:none; }
 
-    /* enchant tags */
-    .enchant-list { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 12px; }
-    .enchant-tag {
-      font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 700;
-      letter-spacing: .3px;
+    /* PAGE HERO */
+    .page-hero {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 72px 20px 56px;
+      border-bottom: 1px solid var(--border);
     }
-    .ench-gold   { background: #3d2e00; color: #ffd54f; border: 1px solid #ffd54f44; }
-    .ench-orange { background: #3d1a00; color: #ff8c42; border: 1px solid #ff8c4244; }
-    .ench-green  { background: #0d3300; color: #69f0ae; border: 1px solid #69f0ae44; }
-    .ench-blue   { background: #001f3d; color: #40c4ff; border: 1px solid #40c4ff44; }
-    .ench-pink   { background: #3d0033; color: #f48fb1; border: 1px solid #f48fb144; }
-    .ench-red    { background: #3d0000; color: #ff5252; border: 1px solid #ff525244; }
-    .ench-purple { background: #1e0033; color: #ce93d8; border: 1px solid #ce93d844; }
+    .page-hero .eyebrow {
+      display: block;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 5px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .page-hero h1 {
+      font-family: 'Cinzel', serif; font-weight: 900;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: #fff; letter-spacing: 4px; margin-bottom: 14px;
+    }
+    .page-hero h1 em { color: var(--accent); font-style: normal; }
+    .page-hero p { font-size: 13px; color: var(--muted); max-width: 440px; margin: 0 auto; line-height: 1.7; }
 
-    /* ── Recipe toggle button ── */
-    .btn-recipe {
-      background: transparent;
-      border: 2px solid #e84393;
-      color: #e84393;
-      padding: 5px 14px;
-      font-size: 13px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all .2s;
-      font-family: 'VT323', monospace;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
+    /* FILTER BAR */
+    .filter-bar {
+      position: relative; z-index: 1;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px; padding: 30px 20px 36px;
     }
-    .btn-recipe:hover, .btn-recipe.active {
-      background: #e84393;
-      color: #fff;
+    .filter-btn {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 7px 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer; transition: all .2s;
     }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { border-color: var(--accent); background: var(--accent); color: #000; font-weight: 600; }
 
-    /* ── Crafting grid panel ── */
-    .recipe-panel {
-      display: none;
-      background: #0d0d1a;
-      border-top: 2px solid #e84393;
-      padding: 16px;
-    }
-    .recipe-panel.open { display: block; }
-    .recipe-panel .recipe-title {
-      font-family: 'VT323', monospace;
-      color: #e84393;
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-    }
-    .crafting-ui {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .craft-grid {
+    /* GRID */
+    .items-section { position: relative; z-index: 1; padding-bottom: 80px; }
+    #itemGrid {
       display: grid;
-      grid-template-columns: repeat(3, 48px);
-      grid-template-rows: repeat(3, 48px);
-      gap: 3px;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+
+    /* CARD */
+    .item-card {
+      background: var(--surface);
+      display: flex; flex-direction: column;
+      transition: background .2s;
+      animation: fadeIn .35s ease both;
+    }
+    .item-card:hover { background: var(--surface2); }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .item-card:nth-child(1){animation-delay:.04s} .item-card:nth-child(2){animation-delay:.08s}
+    .item-card:nth-child(3){animation-delay:.12s} .item-card:nth-child(4){animation-delay:.16s}
+    .item-card:nth-child(5){animation-delay:.20s} .item-card:nth-child(6){animation-delay:.24s}
+    .item-card:nth-child(7){animation-delay:.28s} .item-card:nth-child(8){animation-delay:.32s}
+    .item-card:nth-child(9){animation-delay:.36s}
+
+    .card-img {
+      height: 155px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .card-img::after {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse at 50% 110%, rgba(200,169,110,.08) 0%, transparent 65%);
+    }
+    .card-img img {
+      max-height: 96px; max-width: 75%;
+      object-fit: contain; image-rendering: pixelated;
+      position: relative; z-index:1;
+      filter: drop-shadow(0 6px 18px rgba(200,169,110,.2));
+      transition: transform .3s;
+    }
+    .item-card:hover .card-img img { transform: scale(1.07) translateY(-2px); }
+
+    .card-body { padding: 18px 20px; flex:1; display:flex; flex-direction:column; gap:10px; }
+
+    .card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+    .card-name { font-family:'Cinzel',serif; font-weight:600; font-size:.95rem; color:#fff; line-height:1.35; }
+
+    .cat-pill {
+      font-size: 9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+      padding: 3px 9px; flex-shrink:0; margin-top:1px;
+    }
+    .p-weapon    { background:rgba(200,60,60,.15);  color:#e87070; border:1px solid rgba(200,60,60,.3); }
+    .p-armor     { background:rgba(60,110,220,.15); color:#7aaaf0; border:1px solid rgba(60,110,220,.3); }
+    .p-tool      { background:rgba(60,190,100,.15); color:#70e898; border:1px solid rgba(60,190,100,.3); }
+    .p-misc      { background:rgba(140,80,220,.15); color:#c090f0; border:1px solid rgba(140,80,220,.3); }
+    .p-bow       { background:rgba(210,150,40,.15); color:#f0c060; border:1px solid rgba(210,150,40,.3); }
+    .p-consumable{ background:rgba(40,190,150,.15); color:#60f0c0; border:1px solid rgba(40,190,150,.3); }
+
+    .card-desc { font-size:12px; color:var(--muted); line-height:1.65; }
+
+    .ench-row { display:flex; flex-wrap:wrap; gap:4px; }
+    .ench {
+      font-size:9.5px; font-weight:500;
+      padding:2px 7px; letter-spacing:.3px;
+    }
+    .eg  { background:rgba(255,200,60,.07);  color:#ffc83c; border:1px solid rgba(255,200,60,.2); }
+    .eo  { background:rgba(255,130,50,.07);  color:#ff8232; border:1px solid rgba(255,130,50,.2); }
+    .egr { background:rgba(80,220,130,.07);  color:#50dc82; border:1px solid rgba(80,220,130,.2); }
+    .eb  { background:rgba(60,180,255,.07);  color:#3cb4ff; border:1px solid rgba(60,180,255,.2); }
+    .er  { background:rgba(230,60,60,.07);   color:#e66060; border:1px solid rgba(230,60,60,.2); }
+    .ep  { background:rgba(170,100,240,.07); color:#aa64f0; border:1px solid rgba(170,100,240,.2); }
+
+    .btn-recipe {
+      margin-top:auto;
+      align-self:flex-start;
+      font-size:10px; font-weight:500;
+      letter-spacing:2px; text-transform:uppercase;
+      padding:7px 16px;
+      border:1px solid var(--border);
+      background:transparent; color:var(--muted);
+      cursor:pointer; transition:all .2s;
+      display:flex; align-items:center; gap:7px;
+    }
+    .btn-recipe:hover { border-color:var(--accent); color:var(--accent); }
+    .btn-recipe.open  { border-color:var(--accent); background:rgba(200,169,110,.07); color:var(--accent); }
+    .btn-recipe .chev { display:inline-block; transition:transform .25s; font-size:.65rem; }
+    .btn-recipe.open .chev { transform:rotate(180deg); }
+
+    /* RECIPE PANEL */
+    .recipe-panel {
+      max-height: 0; overflow:hidden;
+      transition: max-height .32s cubic-bezier(.4,0,.2,1);
+      background: var(--bg);
+      border-top: 1px solid transparent;
+    }
+    .recipe-panel.open { max-height: 320px; border-top-color:var(--border); }
+    .rp-inner { padding:20px; }
+    .rp-label {
+      font-size:9px; font-weight:500; letter-spacing:4px;
+      text-transform:uppercase; color:var(--muted); margin-bottom:14px;
+    }
+    .rp-ui { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+
+    .craft-grid {
+      display:grid;
+      grid-template-columns:repeat(3,50px);
+      grid-template-rows:repeat(3,50px);
+      gap:2px;
     }
     .craft-slot {
-      width: 48px; height: 48px;
-      background: #2a2a3a;
-      border: 2px solid #444;
-      border-top-color: #222;
-      border-left-color: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #aaa;
-      text-align: center;
-      line-height: 1.2;
-      padding: 2px;
-      position: relative;
+      width:50px; height:50px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-size:9px; color:var(--muted);
+      text-align:center; line-height:1.2; padding:3px;
     }
-    .craft-slot.filled {
-      background: #1e2a3a;
-      border-color: #556;
-      border-top-color: #223;
-      border-left-color: #223;
-      color: #ddd;
-    }
-    .craft-arrow {
-      font-size: 2rem;
-      color: #666;
-      flex-shrink: 0;
-    }
-    .craft-output {
-      width: 58px; height: 58px;
-      background: #1e2a3a;
-      border: 3px solid #e84393;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .craft-output img {
-      width: 44px; height: 44px;
-      object-fit: contain;
-      image-rendering: pixelated;
-    }
-    .craft-output-label {
-      font-family: 'VT323', monospace;
-      font-size: 0.85rem;
-      color: #e84393;
-      text-align: center;
-      margin-top: 4px;
-      max-width: 60px;
-      line-height: 1.1;
-    }
-    .craft-note {
-      font-size: 11px;
-      color: #888;
-      margin-top: 10px;
-      font-style: italic;
+    .craft-slot.on {
+      background:rgba(200,169,110,.05);
+      border-color:rgba(200,169,110,.2);
+      color:var(--text);
     }
 
-    /* heading */
-    .heading_container h2 { color: #fff; }
+    .rp-arrow { color:var(--muted); font-size:1.2rem; flex-shrink:0; }
 
-    /* section bg */
-    .food_section { background: #0f0f1e; }
+    .rp-result { display:flex; flex-direction:column; align-items:center; gap:7px; }
+    .rp-box {
+      width:60px; height:60px;
+      background:rgba(200,169,110,.06);
+      border:1px solid rgba(200,169,110,.3);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .rp-box img { width:44px; height:44px; object-fit:contain; image-rendering:pixelated; }
+    .rp-name { font-size:9.5px; color:var(--accent); text-align:center; max-width:68px; line-height:1.3; font-weight:500; }
+
+    .rp-note {
+      margin-top:12px; font-size:11px; color:var(--muted); font-style:italic;
+      border-left:2px solid var(--border); padding-left:10px; line-height:1.5;
+    }
+
+    /* FOOTER */
+    .footer_section { position:relative; z-index:1; background:var(--surface); border-top:1px solid var(--border); padding:40px 0 20px; }
+    .footer_section h4 { font-family:'Cinzel',serif; font-size:.8rem; letter-spacing:2px; color:var(--accent); margin-bottom:14px; }
+    .footer_section p, .footer_section a, .footer_section span { font-size:13px; color:var(--muted); }
+    .footer_section a:hover { color:var(--accent); text-decoration:none; }
+    .footer-logo { font-family:'Cinzel',serif; font-size:1.1rem; color:var(--accent) !important; letter-spacing:3px; display:block; margin-bottom:10px; }
+    .footer_social a { margin-right:12px; }
+    .footer-info { border-top:1px solid var(--border); padding-top:20px; margin-top:20px; text-align:center; }
+    .contact_link_box a { display:block; margin-bottom:8px; }
+    .contact_link_box i { margin-right:8px; }
   </style>
 </head>
 
 <body class="sub_page">
 
+  <!-- Header -->
   <div class="hero_area">
-    <div class="bg-box">
-      <img src="images/hero-bg.jpg" alt="">
-    </div>
+    <div class="bg-box"><img src="images/hero-bg.jpg" alt=""></div>
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href="index.html"><span>Mucky</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""></span>
+            <span></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-              <li class="nav-item active"><a class="nav-link" href="items.html">Custom Items <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item active"><a class="nav-link" href="items.html">Custom Items</a></li>
               <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
             </ul>
             <div class="user_option">
@@ -258,62 +281,55 @@
     </header>
   </div>
 
-  <!-- Items Section -->
-  <section class="food_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>Custom Items</h2>
-        <p style="color:#aaa;">All craftable custom items on MuckySMP. Click <strong style="color:#e84393;">View Recipe</strong> to see how to craft each item.</p>
-      </div>
+  <!-- Hero -->
+  <div class="page-hero">
+    <span class="eyebrow">MuckySMP Server</span>
+    <h1>Custom <em>Items</em></h1>
+    <p>Every craftable item available on the server. Click <strong style="color:var(--accent);font-weight:500;">View Recipe</strong> on any card to reveal the full crafting grid.</p>
+  </div>
 
-      <ul class="filters_menu" id="filterMenu">
-        <li class="active" data-filter="all">All</li>
-        <li data-filter="weapon">Weapons</li>
-        <li data-filter="armor">Armor</li>
-        <li data-filter="tool">Tools</li>
-        <li data-filter="bow">Bows</li>
-        <li data-filter="consumable">Consumables</li>
-        <li data-filter="misc">Misc</li>
-      </ul>
-
-      <div class="row" id="itemGrid">
-        <!-- Cards injected by JS -->
-      </div>
+  <!-- Items -->
+  <section class="items-section">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="weapon">⚔ Weapons</button>
+      <button class="filter-btn" data-filter="armor">🛡 Armor</button>
+      <button class="filter-btn" data-filter="tool">⛏ Tools</button>
+      <button class="filter-btn" data-filter="bow">🏹 Bows</button>
+      <button class="filter-btn" data-filter="consumable">🍎 Consumables</button>
+      <button class="filter-btn" data-filter="misc">💎 Materials</button>
     </div>
+    <div id="itemGrid"></div>
   </section>
 
   <!-- Footer -->
   <footer class="footer_section">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 footer-col">
-          <div class="footer_contact">
-            <h4>Contact Us</h4>
-            <div class="contact_link_box">
-              <a href=""><i class="fa fa-phone" aria-hidden="true"></i><span>Discord: RUI or Owner — 1477802658382483539</span></a>
-              <a href=""><i class="fa fa-envelope" aria-hidden="true"></i><span>muckysmp@gmail.com</span></a>
-            </div>
+        <div class="col-md-4">
+          <h4>Contact</h4>
+          <div class="contact_link_box">
+            <a href=""><i class="fa fa-comment"></i>Discord: RUI or Owner</a>
+            <a href=""><i class="fa fa-envelope"></i>muckysmp@gmail.com</a>
           </div>
         </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_detail">
-            <a href="index.html" class="footer-logo">MuckySMP</a>
-            <p>We always welcome people with open arms, so if you want to join our server, please contact us on Discord!</p>
-            <div class="footer_social">
-              <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            </div>
+        <div class="col-md-4" style="text-align:center;">
+          <a href="index.html" class="footer-logo">MuckySMP</a>
+          <p style="margin-bottom:14px;">Join us on Discord — everyone's welcome.</p>
+          <div class="footer_social">
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
           </div>
         </div>
-        <div class="col-md-4 footer-col">
+        <div class="col-md-4" style="text-align:right;">
           <h4>Server Hours</h4>
           <p>Maybe Online</p>
           <p>Until 9:00 PM</p>
         </div>
       </div>
       <div class="footer-info">
-        <p>&copy; <span id="displayYear"></span> Copyright MuckySMP &nbsp;|&nbsp; Hosted by Github</p>
+        <p>&copy; <span id="yr"></span> MuckySMP — Hosted on GitHub</p>
       </div>
     </div>
   </footer>
@@ -321,384 +337,186 @@
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="js/bootstrap.js"></script>
-
   <script>
-    document.getElementById('displayYear').textContent = new Date().getFullYear();
-
-    // ─────────────────────────────────────────────
-    // ITEM DATA  (parsed from all .sk files)
-    // ─────────────────────────────────────────────
-    // recipe: array of 9 strings, left→right top→bottom. "" = empty slot.
-    // image: filename in images/items/
-    // enchants: [{label, cls}]
-    // ─────────────────────────────────────────────
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
     const ITEMS = [
+      // WEAPONS
+      { name:"Soaring Black Sword", cat:"weapon", img:"images/items/Sky_Soaring_black_Sword.png",
+        desc:"Forged from ancient netherite. Grants +10 attack damage and +10 max health. The sky is no limit.",
+        enc:[{l:"Sharpness X",c:"eo"},{l:"Fire Aspect V",c:"er"},{l:"Looting X",c:"eg"},{l:"Sweeping V",c:"eb"},{l:"Unbreaking V",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["Diamond","Nether Star","Netherite Block","Diamond","Netherite Sword","Nether Star","Nether Brick Wall","Diamond","Diamond"] },
 
-      // ── WEAPONS ──────────────────────────────
-      {
-        name: "Soaring Black Sword",
-        category: "weapon",
-        image: "images/items/Soaring_Black_Sword.png",
-        desc: "Forged from ancient netherite that drank flame and sky. Grants flight with every strike.",
-        enchants: [
-          {l:"Sharpness X", c:"ench-orange"}, {l:"Fire Aspect V", c:"ench-red"},
-          {l:"Looting X", c:"ench-gold"}, {l:"Sweeping V", c:"ench-blue"},
-          {l:"Unbreaking V", c:"ench-green"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "Diamond","Nether Star","Netherite Block",
-          "Diamond","Netherite Sword","Nether Star",
-          "Nether Brick Wall","Diamond","Diamond"
-        ]
-      },
-      {
-        name: "Dragon Great Sword",
-        category: "weapon",
-        image: "images/items/Dragon_Great_Sword.png",
-        desc: "Forged from the ancient dragon egg. To the chosen, they are the ruler of the world.",
-        enchants: [
-          {l:"Sharpness X", c:"ench-orange"}, {l:"Fire Aspect V", c:"ench-red"},
-          {l:"Looting X", c:"ench-gold"}, {l:"Sweeping V", c:"ench-blue"},
-          {l:"Unbreaking V", c:"ench-green"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "","End Rod","",
-          "","Sky Soaring Black Sword","",
-          "","Dragon Egg",""
-        ]
-      },
-      {
-        name: "Wax Mace",
-        category: "weapon",
-        image: "images/items/Wax_Mace.png",
-        desc: "Right click to unleash a shockwave. Devastates enemies in close range.",
-        enchants: [
-          {l:"Sharpness X", c:"ench-orange"}, {l:"Breach IV", c:"ench-purple"},
-          {l:"Unbreaking V", c:"ench-green"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "Diamond Block","Netherite Block","Diamond Block",
-          "Nether Star","Mace","Nether Star",
-          "","Stick",""
-        ]
-      },
+      { name:"Dragon Great Sword", cat:"weapon", img:"images/items/Dragon_Great_Sword.png",
+        desc:"Forged from the ancient dragon egg. +20 attack damage, +40 max health. To the chosen, they rule the world.",
+        enc:[{l:"Sharpness X",c:"eo"},{l:"Fire Aspect V",c:"er"},{l:"Looting X",c:"eg"},{l:"Sweeping V",c:"eb"},{l:"Unbreaking V",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["","End Rod","","","Soaring Black Sword","","","Dragon Egg",""] },
 
-      // ── BOWS ─────────────────────────────────
-      {
-        name: "Corrupted Bow",
-        category: "bow",
-        image: "images/items/Corrupted_Bow.png",
-        desc: "A bow tainted by the deep dark. Powerful and relentless.",
-        enchants: [
-          {l:"Power V", c:"ench-orange"}, {l:"Flame III", c:"ench-red"},
-          {l:"Punch III", c:"ench-blue"}, {l:"Unbreaking V", c:"ench-green"},
-          {l:"Infinity", c:"ench-gold"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "Sculk","Echo Shard","Sculk",
-          "Amethyst Shard","Bow","Sculk Shrieker",
-          "Sculk","Echo Shard","Sculk"
-        ]
-      },
-      {
-        name: "End Bow",
-        category: "bow",
-        image: "images/items/End_Bow.png",
-        desc: "Crafted from the power of the End itself. The ultimate ranged weapon.",
-        enchants: [
-          {l:"Power X", c:"ench-orange"}, {l:"Flame X", c:"ench-red"},
-          {l:"Punch V", c:"ench-blue"}, {l:"Unbreaking X", c:"ench-green"},
-          {l:"Infinity", c:"ench-gold"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "","End Crystal","Ender Pearl",
-          "Ender Eye","Corrupted Bow","Ender Pearl",
-          "","End Crystal","Ender Pearl"
-        ]
-      },
+      { name:"Wax Mace", cat:"weapon", img:"images/items/War_Mace.png",
+        desc:"Right-click to unleash a shockwave that launches and damages all nearby enemies.",
+        enc:[{l:"Sharpness X",c:"eo"},{l:"Breach IV",c:"ep"},{l:"Unbreaking V",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["Diamond Block","Netherite Block","Diamond Block","Nether Star","Mace","Nether Star","","Stick",""] },
 
-      // ── ARMOR ─────────────────────────────────
-      {
-        name: "Barbarian Armor",
-        category: "armor",
-        image: "images/items/Barbarian_Armor.png",
-        desc: "Iron armor imbued with barbaric gems. Grants speed, armor, and health. Helmet grants Night Vision.",
-        enchants: [
-          {l:"Protection II", c:"ench-blue"}, {l:"Unbreaking V", c:"ench-green"}
-        ],
-        recipe: [
-          "","Barbaric Gem","",
-          "Barbaric Gem","Iron Armor Piece","Barbaric Gem",
-          "","Barbaric Gem",""
-        ],
-        note: "Replace 'Iron Armor Piece' with Helmet / Chestplate / Leggings / Boots for each piece."
-      },
-      {
-        name: "Royal Armor",
-        category: "armor",
-        image: "images/items/Royal_Armor.png",
-        desc: "An item passed down from the royal family. Massive armor, health, and speed bonuses.",
-        enchants: [
-          {l:"Protection X", c:"ench-blue"}, {l:"Unbreaking V", c:"ench-green"},
-          {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "Chain","Diamond Block","Chain",
-          "Diamond","Diamond Armor Piece","Diamond",
-          "Diamond","Netherite Block","Diamond"
-        ],
-        note: "Replace 'Diamond Armor Piece' with Helmet / Chestplate / Leggings / Boots for each piece."
-      },
+      // BOWS
+      { name:"Corrupted Bow", cat:"bow", img:"images/items/Corrupted_Bow.png",
+        desc:"A bow tainted by the deep dark. Powerful, relentless, and completely unbreakable.",
+        enc:[{l:"Power V",c:"eo"},{l:"Flame III",c:"er"},{l:"Punch III",c:"eb"},{l:"Unbreaking V",c:"egr"},{l:"Infinity",c:"eg"},{l:"Mending",c:"egr"}],
+        recipe:["Sculk","Echo Shard","Sculk","Amethyst Shard","Bow","Sculk Shrieker","Sculk","Echo Shard","Sculk"] },
 
-      // ── TOOLS ─────────────────────────────────
-      {
-        name: "Holy Pickaxe",
-        category: "tool",
-        image: "images/items/Holy Pickaxe.png",
-        desc: "+101 Mining Efficiency. The ultimate mining tool.",
-        enchants: [
-          {l:"Efficiency X", c:"ench-gold"}, {l:"Fortune X", c:"ench-purple"},
-          {l:"Sharpness X", c:"ench-orange"}, {l:"Unbreaking V", c:"ench-green"},
-          {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "Diamond Block","Netherite Pickaxe","Diamond Block",
-          "Diamond","Super Netherite","Stick",
-          "","Stick",""
-        ]
-      },
-      {
-        name: "Knight Shield",
-        category: "tool",
-        image: "images/items/Knight_Shield.png",
-        desc: "Grants Speed. A shield crafted for swift knights.",
-        enchants: [
-          {l:"Unbreaking X", c:"ench-green"}, {l:"Mending", c:"ench-green"}
-        ],
-        recipe: [
-          "","Sugar","",
-          "Diamond","Shield","Diamond",
-          "","Sugar",""
-        ]
-      },
+      { name:"End Bow", cat:"bow", img:"images/items/End_Bow.png",
+        desc:"Crafted from the power of the End itself. The ultimate ranged weapon on the server.",
+        enc:[{l:"Power X",c:"eo"},{l:"Flame X",c:"er"},{l:"Punch V",c:"eb"},{l:"Unbreaking X",c:"egr"},{l:"Infinity",c:"eg"},{l:"Mending",c:"egr"}],
+        recipe:["","End Crystal","Ender Pearl","Ender Eye","Corrupted Bow","Ender Pearl","","End Crystal","Ender Pearl"] },
 
-      // ── MISC / CRAFTING MATERIALS ─────────────
-      {
-        name: "Barbaric Gem",
-        category: "misc",
-        image: "images/items/Barbaric_Gem.png",
-        desc: "A gem infused with barbaric energy. Used to craft Barbarian Armor.",
-        enchants: [{l:"Knockback V", c:"ench-purple"}],
-        recipe: [
-          "","Redstone","",
-          "","Diamond","",
-          "","","",
-        ]
-      },
-      {
-        name: "Super Netherite",
-        category: "misc",
-        image: "images/items/Super_Netherite.png",
-        desc: "An enhanced netherite ingot. Used to craft the Holy Pickaxe.",
-        enchants: [{l:"Knockback II", c:"ench-purple"}],
-        recipe: [
-          "Netherite Block","Netherite Ingot","Diamond Block",
-          "Netherite Ingot","Netherite Block","Netherite Ingot",
-          "Diamond Block","Netherite Ingot","Netherite Block"
-        ]
-      },
-      {
-        name: "Ultimate Chaos Emerald",
-        category: "misc",
-        image: "images/items/Ultimate_Chaos_Emerald.png",
-        desc: "A legendary emerald of immense power. Used to craft the Nether Star.",
-        enchants: [{l:"Knockback V", c:"ench-purple"}],
-        recipe: [
-          "Barbaric Gem","Amethyst Shard","Redstone",
-          "Netherite Scrap","Iron Ingot","Gold Ingot",
-          "Lapis Lazuli","Emerald","Diamond"
-        ]
-      },
-      {
-        name: "Nether Star",
-        category: "misc",
-        image: "images/items/Nether_Star.png",
-        desc: "A craftable Nether Star. Rare materials required.",
-        enchants: [],
-        recipe: [
-          "","Netherite Hoe","",
-          "Silence Trim","Ultimate Chaos Emerald","Soul Lantern",
-          "","Mace",""
-        ]
-      },
+      { name:"Sonic Crossbow", cat:"bow", img:"images/items/Sonic_Crossbow.png",
+        desc:"Fires a sonic blast upon impact. Right-click to shoot a piercing sonic wave that can hit multiple targets in a line.",
+        enc:[{l:"Quick Charge V",c:"eb"},{l:"Unbreaking X",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["","Breeze Rod","Diamond","Ancient Shard","End Bow","Diamond","","Breeze Rod","Diamond"] },
 
-      // ── CONSUMABLES ───────────────────────────
-      {
-        name: "Super Apple",
-        category: "consumable",
-        image: "images/items/Super_Apple.png",
-        desc: "An enchanted golden apple surrounded by gold blocks. Maximum healing.",
-        enchants: [],
-        recipe: [
-          "Gold Block","Gold Block","Gold Block",
-          "Gold Block","Apple","Gold Block",
-          "Gold Block","Gold Block","Gold Block"
-        ]
-      },
-      {
-        name: "Lite Apple",
-        category: "consumable",
-        image: "images/items/Lite_Apple.png",
-        desc: "A golden apple crafted with gold ingots. Lite version.",
-        enchants: [],
-        recipe: [
-          "","Gold Ingot","",
-          "Gold Ingot","Apple","Gold Ingot",
-          "","Gold Ingot",""
-        ]
-      },
-      {
-        name: "Lite Golden Carrot",
-        category: "consumable",
-        image: "images/items/Lite_Golden_Carrot.png",
-        desc: "A golden carrot made with gold nuggets.",
-        enchants: [],
-        recipe: [
-          "","Gold Nugget","",
-          "Gold Nugget","Carrot","Gold Nugget",
-          "","Gold Nugget",""
-        ]
-      },
-      {
-        name: "Lite TNT",
-        category: "consumable",
-        image: "images/items/Lite_TNT.png",
-        desc: "TNT crafted from gunpowder and sand.",
-        enchants: [],
-        recipe: [
-          "","Gunpowder","",
-          "Gunpowder","Sand","Gunpowder",
-          "","Gunpowder",""
-        ]
-      },
-      {
-        name: "Lite Anvil",
-        category: "misc",
-        image: "images/items/Lite_Anvil.png",
-        desc: "A crafted anvil using iron ingots and an iron block.",
-        enchants: [],
-        recipe: [
-          "Iron Ingot","Iron Ingot","Iron Ingot",
-          "","Iron Block","",
-          "Iron Ingot","Iron Ingot","Iron Ingot"
-        ]
-      },
-      {
-        name: "XP Item",
-        category: "consumable",
-        image: "images/items/XP_Item.png",
-        desc: "Right-click to instantly gain 1000 XP.",
-        enchants: [],
-        recipe: [
-          "","Redstone","",
-          "Redstone","XP Bottle","Redstone",
-          "","Redstone",""
-        ]
-      },
+      // ARMOR
+      { name:"Barbarian Armor", cat:"armor", img:"images/items/Barbarian_Armor.png",
+        desc:"Iron armor imbued with Barbaric Gems. Grants speed, armor & health. Helmet gives permanent Night Vision.",
+        enc:[{l:"Protection II",c:"eb"},{l:"Unbreaking V",c:"egr"}],
+        recipe:["","Barbaric Gem","","Barbaric Gem","Iron Armor Piece","Barbaric Gem","","Barbaric Gem",""],
+        note:"Craft each piece separately — swap center with Iron Helmet, Chestplate, Leggings, or Boots." },
+
+      { name:"Royal Armor", cat:"armor", img:"images/items/Royal_Armor.png",
+        desc:"Passed down from the royal family. +20 armor, +10 max health, attack speed bonus.",
+        enc:[{l:"Protection X",c:"eb"},{l:"Unbreaking V",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["Chain","Diamond Block","Chain","Diamond","Diamond Armor Piece","Diamond","Diamond","Netherite Block","Diamond"],
+        note:"Craft each piece separately — swap center with Diamond Helmet, Chestplate, Leggings, or Boots." },
+
+      // TOOLS
+      { name:"Holy Pickaxe", cat:"tool", img:"images/items/Holy_Pickaxe.png",
+        desc:"+101 Mining Efficiency. Sharpness X included. The fastest pickaxe on the server.",
+        enc:[{l:"Efficiency X",c:"eg"},{l:"Fortune X",c:"ep"},{l:"Sharpness X",c:"eo"},{l:"Unbreaking V",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["Diamond Block","Netherite Pickaxe","Diamond Block","Diamond","Super Netherite","Stick","","Stick",""] },
+
+      { name:"Knight Shield", cat:"tool", img:"images/items/Knight_Shield.png",
+        desc:"A shield crafted for swift knights. Passively grants a movement speed bonus.",
+        enc:[{l:"Unbreaking X",c:"egr"},{l:"Mending",c:"egr"}],
+        recipe:["","Sugar","","Diamond","Shield","Diamond","","Sugar",""] },
+
+      { name:"Grappling hook", cat:"tool", img:"images/items/Grappling_Hook.png",
+        desc:"Throw to grapple onto surfaces!.",
+        enc:[],
+        recipe:["Iron ingot","Iron ingot","Iron ingot","Iron ingot","Fishing Rod","Iron ingot","Iron ingot","Iron ingot","Iron ingot"] },
+
+      // MATERIALS
+      { name:"Barbaric Gem", cat:"misc", img:"images/items/Barbaric_Gem.png",
+        desc:"A redstone gem infused with barbaric energy. Required to craft all Barbarian Armor pieces.",
+        enc:[],
+        recipe:["","Redstone","","","Diamond","","","",""] },
+
+      { name:"Super Netherite", cat:"misc", img:"images/items/Super_Netherite.png",
+        desc:"An enhanced netherite ingot. Intermediate material required to craft the Holy Pickaxe.",
+        enc:[],
+        recipe:["Netherite Block","Netherite Ingot","Diamond Block","Netherite Ingot","Netherite Block","Netherite Ingot","Diamond Block","Netherite Ingot","Netherite Block"] },
+
+      { name:"Ultimate Chaos Emerald", cat:"misc", img:"images/items/Ultimate_Chaos_Emerald.png",
+        desc:"A legendary emerald of immense power. Required to craft the Nether Star.",
+        enc:[],
+        recipe:["Barbaric Gem","Amethyst Shard","Redstone","Netherite Scrap","Iron Ingot","Gold Ingot","Lapis Lazuli","Emerald","Diamond"] },
+
+      { name:"Nether Star", cat:"misc", img:"images/items/Nether_Star.png",
+        desc:"A craftable Nether Star using extremely rare materials including the Chaos Emerald.",
+        enc:[],
+        recipe:["","Netherite Hoe","","Silence Trim","Chaos Emerald","Soul Lantern","","Mace",""] },
+
+      // CONSUMABLES
+      { name:"Super Apple", cat:"consumable", img:"images/items/Super_Apple.png",
+        desc:"An enchanted golden apple surrounded by gold blocks. Maximum healing and status effects.",
+        enc:[], recipe:["Gold Block","Gold Block","Gold Block","Gold Block","Apple","Gold Block","Gold Block","Gold Block","Gold Block"] },
+
+      { name:"Lite Apple", cat:"consumable", img:"images/items/Lite_Apple.png",
+        desc:"A golden apple crafted with gold ingots instead of blocks. The affordable healing option.",
+        enc:[], recipe:["","Gold Ingot","","Gold Ingot","Apple","Gold Ingot","","Gold Ingot",""] },
+
+      { name:"Lite Golden Carrot", cat:"consumable", img:"images/items/Lite_Golden_Carrot.png",
+        desc:"A golden carrot made with gold nuggets instead of full ingots.",
+        enc:[], recipe:["","Gold Nugget","","Gold Nugget","Carrot","Gold Nugget","","Gold Nugget",""] },
+
+      { name:"Lite TNT", cat:"consumable", img:"images/items/Lite_TNT.png",
+        desc:"TNT crafted purely from gunpowder and sand.",
+        enc:[], recipe:["","Gunpowder","","Gunpowder","Sand","Gunpowder","","Gunpowder",""] },
+
+      { name:"Lite Anvil", cat:"misc", img:"images/items/Lite_Anvil.png",
+        desc:"A craftable anvil using iron ingots and a single iron block.",
+        enc:[], recipe:["Iron Ingot","Iron Ingot","Iron Ingot","","Iron Block","","Iron Ingot","Iron Ingot","Iron Ingot"] },
+
+      { name:"XP Item", cat:"consumable", img:"images/items/XP_Item.png",
+        desc:"Right-click to instantly gain 1,000 experience points.",
+        enc:[], recipe:["","Redstone","","Redstone","XP Bottle","Redstone","","Redstone",""] },
     ];
 
-    // ─────────────────────────────────────────────
-    // Render
-    // ─────────────────────────────────────────────
-    const CATEGORY_BADGE = {
-      weapon:     {cls:"badge-weapon",    label:"⚔ Weapon"},
-      armor:      {cls:"badge-armor",     label:"🛡 Armor"},
-      tool:       {cls:"badge-tool",      label:"⛏ Tool"},
-      bow:        {cls:"badge-bow",       label:"🏹 Bow"},
-      consumable: {cls:"badge-consumable",label:"🍎 Consumable"},
-      misc:       {cls:"badge-misc",      label:"💎 Material"},
-    };
+    const CAT_LABEL = { weapon:"Weapon", armor:"Armor", tool:"Tool", misc:"Material", bow:"Bow", consumable:"Consumable" };
+    const CAT_PILL  = { weapon:"p-weapon", armor:"p-armor", tool:"p-tool", misc:"p-misc", bow:"p-bow", consumable:"p-consumable" };
 
     function buildCard(item, idx) {
-      const badge = CATEGORY_BADGE[item.category] || {cls:"badge-misc", label:item.category};
-      const enchHtml = item.enchants.map(e =>
-        `<span class="enchant-tag ${e.c}">${e.l}</span>`
-      ).join('');
-
-      // Build 9-slot recipe grid
-      let gridHtml = '';
+      const encHtml = item.enc.map(e => `<span class="ench ${e.c}">${e.l}</span>`).join('');
+      let grid = '';
       for (let i = 0; i < 9; i++) {
-        const ing = item.recipe[i] || '';
-        const filled = ing ? 'filled' : '';
-        gridHtml += `<div class="craft-slot ${filled}">${ing}</div>`;
+        const v = item.recipe[i] || '';
+        grid += `<div class="craft-slot${v?' on':''}">${v}</div>`;
       }
-
-      const noteHtml = item.note
-        ? `<p class="craft-note">* ${item.note}</p>` : '';
-
+      const note = item.note ? `<p class="rp-note">${item.note}</p>` : '';
       return `
-      <div class="col-sm-6 col-lg-4 item-col" data-cat="${item.category}">
-        <div class="item-card">
-          <div class="img-box">
-            <img src="${item.image}" alt="${item.name}" onerror="this.style.opacity=0.3">
+      <div class="item-card" data-cat="${item.cat}">
+        <div class="card-img">
+          <img src="${item.img}" alt="${item.name}" onerror="this.style.opacity=0.1">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <div class="card-name">${item.name}</div>
+            <span class="cat-pill ${CAT_PILL[item.cat]}">${CAT_LABEL[item.cat]}</span>
           </div>
-          <div class="detail-box">
-            <h5>${item.name}</h5>
-            <span class="category-badge ${badge.cls}">${badge.label}</span>
-            <p style="color:#aaa;font-size:13px;margin-bottom:8px;">${item.desc}</p>
-            ${enchHtml ? `<div class="enchant-list">${enchHtml}</div>` : ''}
-            <button class="btn-recipe" onclick="toggleRecipe(${idx}, this)">⚒ View Recipe</button>
-          </div>
-          <div class="recipe-panel" id="recipe-${idx}">
-            <div class="recipe-title">Crafting Recipe</div>
-            <div class="crafting-ui">
-              <div class="craft-grid">${gridHtml}</div>
-              <div class="craft-arrow">➜</div>
-              <div>
-                <div class="craft-output">
-                  <img src="${item.image}" alt="${item.name}" onerror="this.style.opacity=0.3">
+          <p class="card-desc">${item.desc}</p>
+          ${encHtml ? `<div class="ench-row">${encHtml}</div>` : ''}
+          <button class="btn-recipe" onclick="toggleRecipe(${idx},this)">
+            <span class="chev">▼</span> View Recipe
+          </button>
+        </div>
+        <div class="recipe-panel" id="rp-${idx}">
+          <div class="rp-inner">
+            <div class="rp-label">Crafting Recipe</div>
+            <div class="rp-ui">
+              <div class="craft-grid">${grid}</div>
+              <div class="rp-arrow">→</div>
+              <div class="rp-result">
+                <div class="rp-box">
+                  <img src="${item.img}" alt="${item.name}" onerror="this.style.opacity=0.1">
                 </div>
-                <div class="craft-output-label">${item.name}</div>
+                <div class="rp-name">${item.name}</div>
               </div>
             </div>
-            ${noteHtml}
+            ${note}
           </div>
         </div>
       </div>`;
     }
 
-    function renderAll(filter) {
-      const grid = document.getElementById('itemGrid');
-      grid.innerHTML = ITEMS
-        .filter(item => filter === 'all' || item.category === filter)
-        .map((item, i) => buildCard(item, ITEMS.indexOf(item)))
-        .join('');
+    function render(filter) {
+      const list = filter === 'all' ? ITEMS : ITEMS.filter(it => it.cat === filter);
+      document.getElementById('itemGrid').innerHTML = list.map((it) => buildCard(it, ITEMS.indexOf(it))).join('');
     }
 
     function toggleRecipe(idx, btn) {
-      const panel = document.getElementById('recipe-' + idx);
-      const isOpen = panel.classList.contains('open');
-      // Close all
+      const panel = document.getElementById('rp-' + idx);
+      const open = panel.classList.contains('open');
       document.querySelectorAll('.recipe-panel').forEach(p => p.classList.remove('open'));
-      document.querySelectorAll('.btn-recipe').forEach(b => { b.classList.remove('active'); b.textContent = '⚒ View Recipe'; });
-      if (!isOpen) {
-        panel.classList.add('open');
-        btn.classList.add('active');
-        btn.textContent = '✕ Hide Recipe';
-      }
+      document.querySelectorAll('.btn-recipe').forEach(b => b.classList.remove('open'));
+      if (!open) { panel.classList.add('open'); btn.classList.add('open'); }
     }
 
-    // Filter menu
-    document.getElementById('filterMenu').addEventListener('click', function(e) {
-      const li = e.target.closest('li');
-      if (!li) return;
-      document.querySelectorAll('.filters_menu li').forEach(l => l.classList.remove('active'));
-      li.classList.add('active');
-      renderAll(li.dataset.filter);
+    document.getElementById('filterBar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.filter);
     });
 
-    renderAll('all');
+    render('all');
   </script>
 </body>
 </html>
