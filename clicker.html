@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immune System Defender</title>
+    <style>
+        :root {
+            --primary: #0288d1;
+            --primary-light: #b3e5fc;
+            --dark: #01579b;
+            --bg: #e1f5fe;
+            --text: #212121;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Clicker Section */
+        .click-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-display {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .cps-display {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #cell-button {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, #e0f7fa 0%, #4fc3f7 70%, #0288d1 100%);
+            border-radius: 50%;
+            border: 8px solid #b3e5fc;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #01579b;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            user-select: none;
+        }
+
+        #cell-button:active {
+            transform: scale(0.92);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Upgrades Section */
+        .upgrades-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .upgrades-section h2 {
+            color: var(--dark);
+            margin-top: 0;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 10px;
+        }
+
+        .upgrade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-light);
+            transition: background 0.2s;
+        }
+
+        .upgrade-info {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+        }
+
+        .upgrade-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .upgrade-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .upgrade-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .upgrade-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .upgrade-btn:hover:not(:disabled) {
+            background-color: var(--dark);
+        }
+
+        /* Modal Overlays */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .modal h2 {
+            color: var(--dark);
+            margin-top: 0;
+        }
+
+        .modal p, .modal li {
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .modal button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .quiz-option {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: left;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .quiz-option:hover {
+            background: #e0e0e0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Immune System Defender</h1>
+        <p>Deploy leukocytes and defend the host against pathogens!</p>
+    </header>
+
+    <div class="game-container">
+        <div class="click-section">
+            <div class="score-display">White Blood Cells (WBC): <span id="wbc-count">0</span></div>
+            <div class="cps-display">Generating <span id="wbc-rate">0</span> WBC/sec</div>
+            <div id="cell-button">CLICK TO TRIGGER<br>IMMUNE RESPONSE</div>
+        </div>
+
+        <div class="upgrades-section">
+            <h2>Immune Response Defense Upgrades</h2>
+            
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-name">Macrophages (<span id="macro-count">0</span>)</span>
+                    <span class="upgrade-desc">Innate immunity cells that engulf and digest cellular debris and pathogens via phagocytosis. (+1 WBC/s)</span>
+                </div>
+                <button class="upgrade-btn" id="buy-macro" onclick="buyUpgrade('macrophage')">Cost: 15</button>
+            </div>
+
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-name">B-Cells (<span id="bcell-count">0</span>)</span>
+                    <span class="upgrade-desc">Adaptive immunity cells that produce specific antibodies to target pathogens. (+5 WBC/s)</span>
+                </div>
+                <button class="upgrade-btn" id="buy-bcell" onclick="buyUpgrade('bcell')">Cost: 100</button>
+            </div>
+
+            <div class="upgrade-item">
+                <div class="upgrade-info">
+                    <span class="upgrade-name">T-Cells (<span id="tcell-count">0</span>)</span>
+                    <span class="upgrade-desc">Cytotoxic cells that identify and destroy infected host cells directly. (+25 WBC/s)</span>
+                </div>
+                <button class="upgrade-btn" id="buy-tcell" onclick="buyUpgrade('tcell')">Cost: 500</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="instructions-overlay" class="overlay">
+        <div class="modal">
+            <h2>Welcome to the Immune System Lab! 🛡️</h2>
+            <p><strong>Educational Context:</strong> Your body is constantly under attack by foreign pathogens (bacteria and viruses). The immune system deploys specialized White Blood Cells (WBCs) to recognize, attack, and remember these invaders.</p>
+            <h3>How to Play:</h3>
+            <ul>
+                <li><strong>Click the Immune Core</strong> to manually generate White Blood Cells (WBC).</li>
+                <li><strong>Recruit Defensive Cells</strong> on the right side to automate your system's biological defenses. Each represents a real immune component.</li>
+                <li><strong>Immunology Quizzes:</strong> Every 50 manual clicks, a Biology Pop Quiz will appear. Answer correctly to receive a massive surge of helper WBCs!</li>
+            </ul>
+            <button onclick="startGame()">Begin Defense Mission</button>
+        </div>
+    </div>
+
+    <div id="quiz-overlay" class="overlay hidden">
+        <div class="modal">
+            <h2>🔬 Immunology Pop Quiz!</h2>
+            <p id="quiz-question">Question text goes here?</p>
+            <div id="quiz-options">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Game State Variables
+        let wbc = 0;
+        let totalClicks = 0;
+        let wbcRate = 0;
+
+        let upgrades = {
+            macrophage: { count: 0, cost: 15, bonus: 1 },
+            bcell: { count: 0, cost: 100, bonus: 5 },
+            tcell: { count: 0, cost: 500, bonus: 25 }
+        };
+
+        // Immune System Quiz Pool
+        const quizBank = [
+            {
+                q: "What is the process called when a macrophage engulfs and destroys a pathogen?",
+                options: ["Mitosis", "Phagocytosis", "Photosynthesis", "Glycolysis"],
+                correct: 1
+            },
+            {
+                q: "Which type of immune cell is responsible for producing antibodies?",
+                options: ["B-Cells", "Red Blood Cells", "T-Cells", "Platelets"],
+                correct: 0
+            },
+            {
+                q: "What is the primary function of memory cells in the immune system?",
+                options: ["To carry oxygen", "To remember past infections for a faster response", "To filter toxins in the kidneys", "To form blood clots"],
+                correct: 1
+            },
+            {
+                q: "Skin and mucous membranes represent which line of defense against pathogens?",
+                options: ["First line (Innate/Barriers)", "Second line (Inflammation)", "Third line (Adaptive)", "Fourth line"],
+                correct: 0
+            },
+            {
+                q: "What foreign molecule or structure triggers an adaptive immune response?",
+                options: ["Antibody", "Hormone", "Antigen", "Enzyme"],
+                correct: 2
+            }
+        ];
+
+        const cellBtn = document.getElementById('cell-button');
+        const wbcCountDisplay = document.getElementById('wbc-count');
+        const wbcRateDisplay = document.getElementById('wbc-rate');
+        const instructionsOverlay = document.getElementById('instructions-overlay');
+        const quizOverlay = document.getElementById('quiz-overlay');
+
+        function startGame() {
+            instructionsOverlay.classList.add('hidden');
+            setInterval(() => {
+                wbc += wbcRate;
+                updateDisplay();
+            }, 1000);
+        }
+
+        cellBtn.addEventListener('click', () => {
+            wbc += 1;
+            totalClicks += 1;
+            updateDisplay();
+
+            if (totalClicks % 50 === 0) {
+                launchQuiz();
+            }
+        });
+
+        function buyUpgrade(type) {
+            let upgrade = upgrades[type];
+            if (wbc >= upgrade.cost) {
+                wbc -= upgrade.cost;
+                upgrade.count++;
+                upgrade.cost = Math.floor(upgrade.cost * 1.4); 
+                
+                calculateRate();
+                updateDisplay();
+            }
+        }
+
+        function calculateRate() {
+            wbcRate = (upgrades.macrophage.count * upgrades.macrophage.bonus) +
+                      (upgrades.bcell.count * upgrades.bcell.bonus) +
+                      (upgrades.tcell.count * upgrades.tcell.bonus);
+        }
+
+        function updateDisplay() {
+            wbcCountDisplay.innerText = Math.floor(wbc);
+            wbcRateDisplay.innerText = wbcRate;
+
+            document.getElementById('macro-count').innerText = upgrades.macrophage.count;
+            document.getElementById('buy-macro').innerText = `Cost: ${upgrades.macrophage.cost}`;
+            document.getElementById('buy-macro').disabled = wbc < upgrades.macrophage.cost;
+
+            document.getElementById('bcell-count').innerText = upgrades.bcell.count;
+            document.getElementById('buy-bcell').innerText = `Cost: ${upgrades.bcell.cost}`;
+            document.getElementById('buy-bcell').disabled = wbc < upgrades.bcell.cost;
+
+            document.getElementById('tcell-count').innerText = upgrades.tcell.count;
+            document.getElementById('buy-tcell').innerText = `Cost: ${upgrades.tcell.cost}`;
+            document.getElementById('buy-tcell').disabled = wbc < upgrades.tcell.cost;
+        }
+
+        function launchQuiz() {
+            let currentQuiz = quizBank[Math.floor(Math.random() * quizBank.length)];
+            document.getElementById('quiz-question').innerText = currentQuiz.q;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = ''; 
+
+            currentQuiz.options.forEach((option, index) => {
+                let btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerText = option;
+                btn.onclick = () => evaluationAnswer(index, currentQuiz.correct);
+                optionsContainer.appendChild(btn);
+            });
+
+            quizOverlay.classList.remove('hidden');
+        }
+
+        function evaluationAnswer(selectedIndex, correctIndex) {
+            quizOverlay.classList.add('hidden');
+            if (selectedIndex === correctIndex) {
+                let prize = Math.max(50, wbcRate * 10);
+                wbc += prize;
+                alert(`Correct! Your immune system successfully recognized the antigen. +${prize} WBC deployed to the bloodstream!`);
+            } else {
+                alert("Incorrect! The pathogen successfully breached temporary tissue defenses. No bonus WBCs generated.");
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
